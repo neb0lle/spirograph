@@ -30,7 +30,7 @@ int main()
 
     SetConfigFlags(FLAG_MSAA_4X_HINT);
     InitWindow(1000, 1000, "SED"); 
-    double pi = 3.141519;
+    double pi = 3.14159265358979323846;
     int FPS = 60;
     SetTargetFPS(FPS);
     Color MyCol = {0, 0, 0, 255};
