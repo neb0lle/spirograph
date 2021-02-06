@@ -1,9 +1,73 @@
 #include <raylib.h>
 #include <cmath>
 #include <iostream>
+#include <vector>
 using namespace std;
 
 int aR = 1, aG = 1, aB = 1;
+void ColUpdate(Color*);
+
+int main()
+{
+    // TAKING USER INPUT (radius & velocity)
+    int nR,i;
+    vector<float> R_list, A_list, VA_list;
+    printf("Enter no. of arms: ");
+    scanf("%d",&nR);
+    printf("Enter Data for each separated by a space:\n");
+    printf("\tRadius: ");
+    float temp;
+    for(i=0;i<nR;++i){
+        scanf("%f",&temp);
+        R_list.push_back(temp); 
+    }
+    printf("\tAngular velocity in degree/ms: ");
+    for(i=0;i<nR;++i){
+        scanf("%f",&temp);
+        A_list.push_back(temp/6);
+        VA_list.push_back(0);
+    } 
+
+    SetConfigFlags(FLAG_MSAA_4X_HINT);
+    InitWindow(1000, 1000, "SED"); 
+    double pi = 3.141519;
+    int FPS = 60;
+    SetTargetFPS(FPS);
+    Color MyCol = {0, 0, 0, 255};
+    Vector2 Spos, Epos = {0,0};
+    ClearBackground(BLACK);
+    while (!WindowShouldClose())
+    {
+        if(IsKeyPressed(KEY_RIGHT)){
+            FPS *= 2;
+            SetTargetFPS(FPS);
+        }
+        if(IsKeyPressed(KEY_LEFT)){
+            FPS /= 2;
+            SetTargetFPS(FPS);
+        }
+        Spos = Epos;
+        Epos = {0,0};
+        for(i=0;i<nR;++i){
+            Epos.x += R_list[i]*cos(VA_list[i]*pi/180);
+            Epos.y += R_list[i]*sin(VA_list[i]*pi/180);
+        }
+        ColUpdate(&MyCol);
+        Epos = {500+Epos.x,500+Epos.y};
+
+        BeginDrawing();
+        DrawLineV(Spos, Epos, MyCol);
+        
+        for(i=0;i<nR;++i){
+            VA_list[i] += A_list[i];
+            if(VA_list[i]>=360 || VA_list[i]<=-360)
+                VA_list[i] = 0;
+        }
+
+        EndDrawing();
+    }
+}
+
 void ColUpdate(Color *Col)
 {
     if (aR == 1)
@@ -57,47 +121,5 @@ void ColUpdate(Color *Col)
             aB *= -1;
             aR *= -1;
         }
-    }
-}
-int main()
-{
-    SetConfigFlags(FLAG_MSAA_4X_HINT);
-    InitWindow(1000, 1000, "SED");
-    int X = 1000 / 2, Y = 1000 / 2;
-    float theta = 0, x1, y1, alpha = 0, x2, y2;
-    float x3, y3, beta = 0;
-    int R = 275, r = 150, r3 = 50;
-    double pi = 3.141519;
-    SetTargetFPS(60);
-    Color MyCol = {0, 0, 0, 255};
-    ClearBackground(BLACK);
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-
-        x1 = R * cos(theta * pi / 180);
-        y1 = R * sin(theta * pi / 180);
-
-        x2 = r * cos(alpha * pi / 180);
-        y2 = r * sin(alpha * pi / 180);
-
-        x3 = r3 * cos(beta * pi / 180);
-        y3 = r3 * cos(beta * pi / 180);
-
-        ColUpdate(&MyCol);
-
-        DrawPixel(X + x1 + x2 + x3, Y + y1 + y2 + y3, MyCol);
-
-        theta += 0.7;
-        alpha += 1;
-        beta += 2;
-
-        if (theta >= 360)
-            theta = 0;
-        if (alpha >= 360)
-            alpha = 0;
-        if (beta >= 360)
-            beta = 0;
-        EndDrawing();
     }
 }
