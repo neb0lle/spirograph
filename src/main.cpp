@@ -2,6 +2,7 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <numeric>
 using namespace std;
 
 int aR = 1, aG = 1, aB = 1;
@@ -15,13 +16,13 @@ int main()
     printf("Enter no. of arms: ");
     scanf("%d",&nR);
     printf("Enter Data for each separated by a space:\n");
-    printf("\tRadius: ");
+    printf("Radius: ");
     float temp;
     for(i=0;i<nR;++i){
         scanf("%f",&temp);
         R_list.push_back(temp); 
     }
-    printf("\tAngular velocity in degree/ms: ");
+    printf("Angular velocity in degree/ms: ");
     for(i=0;i<nR;++i){
         scanf("%f",&temp);
         A_list.push_back(temp/6);
@@ -29,12 +30,12 @@ int main()
     } 
 
     SetConfigFlags(FLAG_MSAA_4X_HINT);
-    InitWindow(1000, 1000, "SED"); 
+    InitWindow(1000, 1000, "spirograph"); 
     double pi = 3.14159265358979323846;
     int FPS = 60;
     SetTargetFPS(FPS);
     Color MyCol = {0, 0, 0, 255};
-    Vector2 Spos, Epos = {0,0};
+    Vector2 Spos, Epos = {accumulate(R_list.begin(),R_list.end(),500.0f),500.0f};
     ClearBackground(BLACK);
     while (!WindowShouldClose())
     {
@@ -56,7 +57,7 @@ int main()
         Epos = {500+Epos.x,500+Epos.y};
 
         BeginDrawing();
-        DrawLineV(Spos, Epos, MyCol);
+        DrawLineV(Spos, Epos, GREEN);
         
         for(i=0;i<nR;++i){
             VA_list[i] += A_list[i];
