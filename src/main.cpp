@@ -39,14 +39,11 @@ int main()
     ClearBackground(BLACK);
     while (!WindowShouldClose())
     {
-        if(IsKeyPressed(KEY_RIGHT)){
+        if(IsKeyPressed(KEY_RIGHT))
             FPS *= 2;
-            SetTargetFPS(FPS);
-        }
-        if(IsKeyPressed(KEY_LEFT)){
+        if(IsKeyPressed(KEY_LEFT))
             FPS /= 2;
-            SetTargetFPS(FPS);
-        }
+        SetTargetFPS(FPS);
         Spos = Epos;
         Epos = {0,0};
         for(i=0;i<nR;++i){
@@ -57,7 +54,7 @@ int main()
         Epos = {500+Epos.x,500+Epos.y};
 
         BeginDrawing();
-        DrawLineV(Spos, Epos, GREEN);
+        DrawLineV(Spos, Epos, MyCol);
         
         for(i=0;i<nR;++i){
             VA_list[i] += A_list[i];
