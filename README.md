@@ -11,3 +11,4 @@ cd spirograph
 make #Compiling
 ./bin/main #Running
 ```
+**NOTE:** Make sure you have installed raylib(https://github.com/raysan5/raylib)
