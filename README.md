@@ -2,7 +2,7 @@
 **Spirograph made in c++ using raylib** 
 
 
-![](https://imgur.com/a/7QRlGbL)
+![alt text](https://imgur.com/a/7QRlGbL)
 
 Usage: 
 ```
