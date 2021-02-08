@@ -4,7 +4,7 @@
 
 ![](https://i.imgur.com/lu8rkUr.png)
 
-Usage: 
+**Usage**: 
 ```
 git clone https://github.com/NevilleJS/spirograph.git
 cd spirograph
