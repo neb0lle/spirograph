@@ -3,6 +3,7 @@
 #include <iostream>
 #include <vector>
 #include <numeric>
+
 using namespace std;
 
 int aR = 1, aG = 1, aB = 1;
