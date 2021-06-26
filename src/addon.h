@@ -1,0 +1,1 @@
+void ColUpdate(Color* Col);
