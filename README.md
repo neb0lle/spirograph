@@ -7,7 +7,8 @@
 **Usage**: 
 ```
 git clone https://github.com/NevilleJS/spirograph.git
-cd spirograph/build
+cd spirograph
+mkdir build && cd build/
 cmake ..
 cmake --build .
 ./spirograph
