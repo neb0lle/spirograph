@@ -4,16 +4,16 @@
 using namespace std;
 
 int aR = 1, aG = 1, aB = 1;
-void ColUpdate(Color* Col)
+void ColUpdate(Color &Col)
 {
     if (aR == 1)
     {
         if (aB == -1)
         {
-            if (Col->r < 255)
+            if (Col.r < 255)
             {
-                Col->r += aR;
-                Col->b += aB;
+                Col.r += aR;
+                Col.b += aB;
             }
             else
             {
@@ -24,21 +24,20 @@ void ColUpdate(Color* Col)
         }
         else
         {
-            if (Col->r < 255)
+            if (Col.r < 255)
             {
-                Col->r += aR;
+                Col.r += aR;
             }
-            else
-                aR *= -1;
+            else aR *= -1;
         }
     }
 
     else if (aR == -1 && aG == 1)
     {
-        if (Col->g < 255)
+        if (Col.g < 255)
         {
-            Col->g += aG;
-            Col->r += aR;
+            Col.g += aG;
+            Col.r += aR;
         }
         else
         {
@@ -47,10 +46,10 @@ void ColUpdate(Color* Col)
     }
     else if (aG == -1 && aB == 1)
     {
-        if (Col->b < 255)
+        if (Col.b < 255)
         {
-            Col->b += aB;
-            Col->g += aG;
+            Col.b += aB;
+            Col.g += aG;
         }
         else
         {
@@ -59,3 +58,8 @@ void ColUpdate(Color* Col)
         }
     }
 }
+/* void ColUpdate(Color &Col, float inc){ */
+/* 	Col.r += aR*inc; */
+/* 	Col.g += aG*inc; */
+/* 	Col.b += aB*inc; */
+/* } */

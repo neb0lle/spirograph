@@ -9,6 +9,10 @@ using namespace std;
 
 int main()
 {
+	int RESOLUTION;
+	printf("Resolution: ");
+	scanf("%d",&RESOLUTION);
+
     // TAKING USER INPUT (radius & velocity)
     int nR,i;
     vector<float> R_list, A_list, VA_list;
@@ -29,12 +33,15 @@ int main()
     } 
 
     SetConfigFlags(FLAG_WINDOW_RESIZABLE);
-    InitWindow(100, 100, "raylib"); 
+    InitWindow(RESOLUTION, RESOLUTION, "raylib"); 
     double pi = 3.14159265358979323846;
     int FPS = 60;
     SetTargetFPS(FPS);
     Color MyCol = {0, 0, 0, 255};
-    Vector2 Spos, Epos = {accumulate(R_list.begin(),R_list.end(),500.0f),500.0f};
+	Vector2 Spos, Epos = {
+		accumulate(R_list.begin(),R_list.end(),(float)RESOLUTION/2),
+		(float)RESOLUTION/2
+	};
     ClearBackground(BLACK);
     while (!WindowShouldClose())
     {
@@ -49,11 +56,12 @@ int main()
             Epos.x += R_list[i]*cos(VA_list[i]*pi/180);
             Epos.y += R_list[i]*sin(VA_list[i]*pi/180);
         }
-        ColUpdate(&MyCol);
-        Epos = {50+Epos.x,50+Epos.y};
+        ColUpdate(MyCol);
+        Epos = {(RESOLUTION/2)+Epos.x,(RESOLUTION/2)+Epos.y};
 
         BeginDrawing();
-        DrawLineV(Spos, Epos, MyCol);
+        /* DrawLineV(Spos, Epos, MyCol); */
+        DrawLineEx(Spos, Epos, 3, MyCol);
         
         for(i=0;i<nR;++i){
             VA_list[i] += A_list[i];
