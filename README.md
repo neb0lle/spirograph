@@ -6,7 +6,7 @@
 
 **Usage**: 
 ```
-git clone https://github.com/NevilleJS/spirograph.git
+git clone https://github.com/s3dman/spirograph.git
 cd spirograph
 mkdir build && cd build/
 cmake ..
